@@ -1143,15 +1143,20 @@
             }
         }
 
-        const text = `*مركز الراشد للاتصالات* 📱✨%0A` +
-                     `السلام عليكم أستاذ *${c.name}* المحترم..%0A%0A` +
-                     `الموقف المالي الحالي لحساب جهازكم 📱 *(${c.model || '--'})*:%0A` +
-                     `💰 *المبلغ المتبقي الصافي:* ${totalRemaining.toLocaleString()} د.ع%0A` +
-                     `📅 *موعد القسط القادم:* ${countdownText} ${nextDueDateStr}%0A` +
-                     `🗓️ *يوم الاستحقاق الشهري:* يوم ${c.fixedDay} من كل شهر.%0A%0A` +
-                     `شكراً لتعاملك مع مركز الراشد. 🌹`;
+        const currentSiteUrl = window.location.href;
 
-        window.open(`https://wa.me/964${c.phone}?text=${text}`);
+        const rawText = `*مركز الراشد للاتصالات* 📱✨\n` +
+                        `السلام عليكم أستاذ *${c.name}* المحترم..\n\n` +
+                        `الموقف المالي الحالي لحساب جهازكم 📱 *(${c.model || '--'})*:\n` +
+                        `💰 *المبلغ المتبقي الصافي:* ${totalRemaining.toLocaleString()} د.ع\n` +
+                        `📅 *موعد القسط القادم:* ${countdownText} ${nextDueDateStr}\n` +
+                        `🗓️ *يوم الاستحقاق الشهري:* يوم ${c.fixedDay} من كل شهر.\n\n` +
+                        `لمتابعة حالة حسابك اضغط على الرابط التالي:\n` +
+                        `${currentSiteUrl}\n\n` +
+                        `شكراً لتعاملك مع مركز الراشد. 🌹`;
+
+        const encodedText = encodeURIComponent(rawText);
+        window.open(`https://wa.me/964${c.phone}?text=${encodedText}`);
     }
 
     function openCalculatorModal() { document.getElementById('calcModal').style.display = 'flex'; }
