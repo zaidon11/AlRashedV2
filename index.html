@@ -547,7 +547,7 @@
     let activeFilter = 'all';
     let targetMonthIndexForPay = null;
 
-    // دالة لتظيف الكائنات الحاوية لمنع قيم undefined مع الفايربيس
+    // دالة لتنظيف الكائنات الحاوية لمنع قيم undefined مع الفايربيس
     function sanitizeForFirebase(obj) {
         return JSON.parse(JSON.stringify(obj, (key, value) => value === undefined ? "" : value));
     }
@@ -1143,7 +1143,8 @@
             }
         }
 
-        const currentSiteUrl = window.location.href;
+        // إدراج رابط موقع الزبون مع المعرف تلقائياً بحسب الإعداد المطلوب
+        const customerTargetUrl = `https://alrashedstore.netlify.app/index.html?id=${currentId}`;
 
         const rawText = `*مركز الراشد للاتصالات* 📱✨\n` +
                         `السلام عليكم أستاذ *${c.name}* المحترم..\n\n` +
@@ -1152,7 +1153,7 @@
                         `📅 *موعد القسط القادم:* ${countdownText} ${nextDueDateStr}\n` +
                         `🗓️ *يوم الاستحقاق الشهري:* يوم ${c.fixedDay} من كل شهر.\n\n` +
                         `لمتابعة حالة حسابك اضغط على الرابط التالي:\n` +
-                        `${currentSiteUrl}\n\n` +
+                        `${customerTargetUrl}\n\n` +
                         `شكراً لتعاملك مع مركز الراشد. 🌹`;
 
         const encodedText = encodeURIComponent(rawText);
